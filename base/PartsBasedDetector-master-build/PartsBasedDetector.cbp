@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="PartsBasedDetector" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\..\..\usr\local\share\OpenCV\;CMake Files\doc\;CMake Files\src\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="PartsBasedDetector_doc">
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 PartsBasedDetector_doc" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install">
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 install" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/local">
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 install/local" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/strip">
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 install/strip" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="list_install_components">
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 list_install_components" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="PartsBasedDetector_bin">
+         <Option output="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/PartsBasedDetector" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/../cvmatio/include" />
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.6" />
+            <Add directory="/usr/include/c++/4.6/backward" />
+            <Add directory="/usr/include/c++/4.6/x86_64-linux-gnu/." />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
+            <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 PartsBasedDetector_bin" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="PartsBasedDetector_bin/fast">
+         <Option output="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/PartsBasedDetector" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/../cvmatio/include" />
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.6" />
+            <Add directory="/usr/include/c++/4.6/backward" />
+            <Add directory="/usr/include/c++/4.6/x86_64-linux-gnu/." />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
+            <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 PartsBasedDetector_bin/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="PartsBasedDetector_lib">
+         <Option output="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/libPartsBasedDetector.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/../cvmatio/include" />
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.6" />
+            <Add directory="/usr/include/c++/4.6/backward" />
+            <Add directory="/usr/include/c++/4.6/x86_64-linux-gnu/." />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
+            <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 PartsBasedDetector_lib" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="PartsBasedDetector_lib/fast">
+         <Option output="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/libPartsBasedDetector.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/../cvmatio/include" />
+            <Add directory="/root/git/repos/ID_01/base/PartsBasedDetector-master/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.6" />
+            <Add directory="/usr/include/c++/4.6/backward" />
+            <Add directory="/usr/include/c++/4.6/x86_64-linux-gnu/." />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed" />
+            <Add directory="/usr/local/include" />
+            <Add directory="/usr/local/include/opencv" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 PartsBasedDetector_lib/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/root/git/repos/ID_01/base/PartsBasedDetector-master-build/src/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/DepthConsistency.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/DynamicProgram.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/FileStorageModel.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/FourierConvolutionEngine.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/HOGFeatures.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/PartsBasedDetector.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/SearchSpacePruning.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/SpatialConvolutionEngine.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/StereoCameraModel.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/Visualize.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/demo.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/nms.cpp">
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/../../../../../../usr/local/share/OpenCV/OpenCVConfig-version.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\share\OpenCV\" />
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/../../../../../../usr/local/share/OpenCV/OpenCVConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\share\OpenCV\" />
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/../../../../../../usr/local/share/OpenCV/OpenCVModules.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\share\OpenCV\" />
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/../../../../../../usr/local/share/OpenCV/OpenCVModules-release.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\local\share\OpenCV\" />
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/doc/Doxyfile.in">
+          <Option virtualFolder="CMake Files\doc\" />
+      </Unit>
+      <Unit filename="/root/git/repos/ID_01/base/PartsBasedDetector-master/src/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\src\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>
