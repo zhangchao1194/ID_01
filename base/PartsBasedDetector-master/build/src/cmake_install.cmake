@@ -39,8 +39,14 @@ IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
          FILE "$ENV{DESTDIR}/root/git/repos/ID_01/base/PartsBasedDetector-master/lib/libPartsBasedDetector.so"
          RPATH "")
   ENDIF()
-  list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
    "/root/git/repos/ID_01/base/PartsBasedDetector-master/lib/libPartsBasedDetector.so")
+  IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+  IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
 FILE(INSTALL DESTINATION "/root/git/repos/ID_01/base/PartsBasedDetector-master/lib" TYPE SHARED_LIBRARY FILES "/root/git/repos/ID_01/base/PartsBasedDetector-master/build/src/libPartsBasedDetector.so")
   IF(EXISTS "$ENV{DESTDIR}/root/git/repos/ID_01/base/PartsBasedDetector-master/lib/libPartsBasedDetector.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/root/git/repos/ID_01/base/PartsBasedDetector-master/lib/libPartsBasedDetector.so")
@@ -59,8 +65,14 @@ IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
          FILE "$ENV{DESTDIR}/root/git/repos/ID_01/base/PartsBasedDetector-master/bin/PartsBasedDetector"
          RPATH "")
   ENDIF()
-  list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+  list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
    "/root/git/repos/ID_01/base/PartsBasedDetector-master/bin/PartsBasedDetector")
+  IF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  ENDIF (CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
+  IF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
+    message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
+  ENDIF (CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
 FILE(INSTALL DESTINATION "/root/git/repos/ID_01/base/PartsBasedDetector-master/bin" TYPE EXECUTABLE FILES "/root/git/repos/ID_01/base/PartsBasedDetector-master/build/src/PartsBasedDetector")
   IF(EXISTS "$ENV{DESTDIR}/root/git/repos/ID_01/base/PartsBasedDetector-master/bin/PartsBasedDetector" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/root/git/repos/ID_01/base/PartsBasedDetector-master/bin/PartsBasedDetector")
