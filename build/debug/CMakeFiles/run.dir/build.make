@@ -31,6 +31,9 @@ CMAKE_COMMAND = /usr/bin/cmake
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
 
+# Escaping for special characters.
+EQUALS = =
+
 # The top-level source directory on which CMake was run.
 CMAKE_SOURCE_DIR = /root/git/repos/ID_01
 
@@ -77,6 +80,7 @@ run_OBJECTS = \
 run_EXTERNAL_OBJECTS =
 
 run: CMakeFiles/run.dir/src/main.cpp.o
+run: CMakeFiles/run.dir/build.make
 run: /usr/local/lib/libopencv_videostab.so.2.4.7
 run: /usr/local/lib/libopencv_video.so.2.4.7
 run: /usr/local/lib/libopencv_ts.a
@@ -102,6 +106,12 @@ run: /usr/lib/x86_64-linux-gnu/libSM.so
 run: /usr/lib/x86_64-linux-gnu/libICE.so
 run: /usr/lib/x86_64-linux-gnu/libX11.so
 run: /usr/lib/x86_64-linux-gnu/libXext.so
+run: /usr/local/cuda/lib64/libcudart.so
+run: /usr/local/cuda/lib64/libnpp.so
+run: /usr/local/cuda/lib64/libcufft.so
+run: /usr/local/cuda/lib64/libcudart.so
+run: /usr/local/cuda/lib64/libnpp.so
+run: /usr/local/cuda/lib64/libcufft.so
 run: /usr/local/lib/libopencv_nonfree.so.2.4.7
 run: /usr/local/lib/libopencv_ocl.so.2.4.7
 run: /usr/local/lib/libopencv_gpu.so.2.4.7
@@ -116,7 +126,6 @@ run: /usr/local/lib/libopencv_highgui.so.2.4.7
 run: /usr/local/lib/libopencv_imgproc.so.2.4.7
 run: /usr/local/lib/libopencv_flann.so.2.4.7
 run: /usr/local/lib/libopencv_core.so.2.4.7
-run: CMakeFiles/run.dir/build.make
 run: CMakeFiles/run.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable run"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/run.dir/link.txt --verbose=$(VERBOSE)
