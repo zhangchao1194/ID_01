@@ -1,3 +1,0 @@
-/root/git/repos/ID_01/base/PartsBasedDetector-master/build/src/CMakeFiles/PartsBasedDetector_bin.dir
-/root/git/repos/ID_01/base/PartsBasedDetector-master/build/CMakeFiles/PartsBasedDetector_doc.dir
-/root/git/repos/ID_01/base/PartsBasedDetector-master/build/src/CMakeFiles/PartsBasedDetector_lib.dir

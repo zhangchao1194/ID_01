@@ -1,6 +1,6 @@
 # --------------------
 # Project settings
-PROJECT_NAME            = PartsBasedDetector
+PROJECT_NAME            = zhangPoseEstimation
 INPUT                   = /root/git/repos/ID_01/base/PartsBasedDetector-master/src /root/git/repos/ID_01/base/PartsBasedDetector-master/include
 OUTPUT_DIRECTORY        = /root/git/repos/ID_01/base/PartsBasedDetector-master/doc
 

@@ -106,12 +106,6 @@ run: /usr/lib/x86_64-linux-gnu/libSM.so
 run: /usr/lib/x86_64-linux-gnu/libICE.so
 run: /usr/lib/x86_64-linux-gnu/libX11.so
 run: /usr/lib/x86_64-linux-gnu/libXext.so
-run: /usr/local/cuda/lib64/libcudart.so
-run: /usr/local/cuda/lib64/libnpp.so
-run: /usr/local/cuda/lib64/libcufft.so
-run: /usr/local/cuda/lib64/libcudart.so
-run: /usr/local/cuda/lib64/libnpp.so
-run: /usr/local/cuda/lib64/libcufft.so
 run: /usr/local/lib/libopencv_nonfree.so.2.4.7
 run: /usr/local/lib/libopencv_ocl.so.2.4.7
 run: /usr/local/lib/libopencv_gpu.so.2.4.7
