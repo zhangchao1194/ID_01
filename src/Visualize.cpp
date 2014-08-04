@@ -37,7 +37,9 @@
  */
 
 #include <boost/lexical_cast.hpp>
+#include <iostream>
 #include "Visualize.hpp"
+
 using namespace cv;
 using namespace std;
 
@@ -53,38 +55,40 @@ using namespace std;
  */
 void Visualize::candidates(const Mat& im, const vectorCandidate& candidates, size_t N, Mat& canvas, bool display_confidence) const {
 
-	// create a new canvas that we can modify
-  cvtColor(im, canvas, COLOR_RGB2BGR);
-  if (candidates.size() == 0) return;
+    // create a new canvas that we can modify
+    cvtColor(im, canvas, COLOR_RGB2BGR);
+    if (candidates.size() == 0) return;
 
-	// generate a set of colors to display. Do this in HSV then convert it
-	const size_t ncolors = candidates[0].parts().size();
-	vector<Scalar> colors;
-	for (size_t n = 0; n < ncolors; ++n) {
-		Mat color(Size(1,1), CV_32FC3);
-		// Hue is in degrees, not radians (because consistency is over-rated)
-		color.at<float>(0) = (360) / ncolors * n;
-		color.at<float>(1) = 1.0;
-		color.at<float>(2) = 0.7;
-		cvtColor(color, color, COLOR_HSV2BGR);
-		color = color * 255;
-		colors.push_back(Scalar(color.at<float>(0), color.at<float>(1), color.at<float>(2)));
-	}
+    // generate a set of colors to display. Do this in HSV then convert it
+    const size_t ncolors = candidates[0].parts().size();
+    vector<Scalar> colors;
+    for (size_t n = 0; n < ncolors; ++n) {
+        Mat color(Size(1,1), CV_32FC3);
+        // Hue is in degrees, not radians (because consistency is over-rated)
+        color.at<float>(0) = (360) / ncolors * n;
+        color.at<float>(1) = 1.0;
+        color.at<float>(2) = 0.7;
+        cvtColor(color, color, COLOR_HSV2BGR);
+        color = color * 255;
+        colors.push_back(Scalar(color.at<float>(0), color.at<float>(1), color.at<float>(2)));
+    }
 
-	// draw each candidate to the canvas
-	const int LINE_THICKNESS = 4;
-	Scalar black(0,0,0);
-	N = (candidates.size() < N) ? candidates.size() : N;
-	for (size_t n = 0; n < N; ++n) {
-		Candidate candidate = candidates[n];
-		for (size_t p = 0; p < candidate.parts().size(); ++p) {
-			Rect box = candidate.parts()[p];
-			string confidence  = boost::lexical_cast<string>(candidate.confidence()[p]);
-			rectangle(canvas, box, colors[p], LINE_THICKNESS);
-			if (display_confidence && p == 0) putText(canvas, confidence, Point(box.x, box.y-5), FONT_HERSHEY_SIMPLEX, 0.5f, black, 2);
-		}
-		//rectangle(canvas, candidate.boundingBox(), Scalar(255, 0, 0), LINE_THICKNESS);
-	}
+    // draw each candidate to the canvas
+    const int LINE_THICKNESS = 4;
+    Scalar black(0,0,0);
+    N = (candidates.size() < N) ? candidates.size() : N;
+    for (size_t n = 0; n < N; ++n) {
+        Candidate candidate = candidates[n];
+        std::cout<<"Number of parts: "<<candidate.parts().size()<<endl;
+        for (size_t p = 0; p < candidate.parts().size(); ++p) {
+            Rect box = candidate.parts()[p];
+            string confidence  = boost::lexical_cast<string>(candidate.confidence()[p]);
+            //rectangle(canvas, box, colors[p], LINE_THICKNESS);
+            circle(canvas, Point(box.tl().x+box.width/2, box.tl().y+box.height/2), box.width/2, colors[p], 5);
+            if (display_confidence && p == 0) putText(canvas, confidence, Point(box.x, box.y-5), FONT_HERSHEY_SIMPLEX, 0.5f, black, 2);
+        }
+        //rectangle(canvas, candidate.boundingBox(), Scalar(255, 0, 0), LINE_THICKNESS);
+    }
 }
 
 /*! @brief visualize all of the candidate part locations overlaid on an image
@@ -96,7 +100,7 @@ void Visualize::candidates(const Mat& im, const vectorCandidate& candidates, siz
  * for each part
  */
 void Visualize::candidates(const Mat& im, const vector<Candidate>& candidates, Mat& canvas, bool display_confidence) const {
-	Visualize::candidates(im, candidates, candidates.size(), canvas, display_confidence);
+    Visualize::candidates(im, candidates, candidates.size(), canvas, display_confidence);
 }
 
 /*! @brief visualize a single candidate overlaid on an image
@@ -108,9 +112,9 @@ void Visualize::candidates(const Mat& im, const vector<Candidate>& candidates, M
  */
 void Visualize::candidates(const Mat& im, const Candidate& candidate, Mat& canvas, bool display_confidence) const {
 
-	vector<Candidate> vec;
-	vec.push_back(candidate);
-	candidates(im, vec, canvas, display_confidence);
+    vector<Candidate> vec;
+    vec.push_back(candidate);
+    candidates(im, vec, canvas, display_confidence);
 }
 
 /*! @brief display the raw image with no overlay
@@ -121,9 +125,9 @@ void Visualize::image(const Mat& im) const {
     Mat canvas;
     cvtColor(im, canvas, COLOR_RGB2BGR);
 #if (CV_MAJOR_VERSION < 3)
-	namedWindow(name_, CV_WINDOW_AUTOSIZE | CV_WINDOW_KEEPRATIO);
+    namedWindow(name_, CV_WINDOW_AUTOSIZE | CV_WINDOW_KEEPRATIO);
 #else
-	namedWindow(name_, WINDOW_AUTOSIZE | WINDOW_KEEPRATIO);
+    namedWindow(name_, WINDOW_AUTOSIZE | WINDOW_KEEPRATIO);
 #endif
-	imshow(name_, canvas);
+    imshow(name_, canvas);
 }

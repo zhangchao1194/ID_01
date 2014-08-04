@@ -83,47 +83,47 @@ using namespace cv;
  */
 void nonMaximaSuppression(const Mat& src, const int sz, Mat& dst, const Mat mask) {
 
-	// initialise the block mask and destination
-	const size_t M = src.rows;
-	const size_t N = src.cols;
-	const bool masked = !mask.empty();
-	Mat block = 255*Mat_<uint8_t>::ones(Size(2*sz+1,2*sz+1));
-	dst = Mat_<uint8_t>::zeros(src.size());
+    // initialise the block mask and destination
+    const size_t M = src.rows;
+    const size_t N = src.cols;
+    const bool masked = !mask.empty();
+    Mat block = 255*Mat_<uint8_t>::ones(Size(2*sz+1,2*sz+1));
+    dst = Mat_<uint8_t>::zeros(src.size());
 
-	// iterate over image blocks
-	for (size_t m = 0; m < M; m+=sz+1) {
-		for (size_t n = 0; n < N; n+=sz+1) {
-			Point  ijmax;
-			double vcmax, vnmax;
+    // iterate over image blocks
+    for (size_t m = 0; m < M; m+=sz+1) {
+        for (size_t n = 0; n < N; n+=sz+1) {
+            Point  ijmax;
+            double vcmax, vnmax;
 
-			// get the maximal candidate within the block
-			Range ic(m, min(m+sz+1,M));
-			Range jc(n, min(n+sz+1,N));
-			if (masked)
-				minMaxLoc(src(ic,jc), NULL, &vcmax, NULL, &ijmax, mask(ic,jc));
-			else
-				minMaxLoc(src(ic,jc), NULL, &vcmax, NULL, &ijmax, noArray());
+            // get the maximal candidate within the block
+            Range ic(m, min(m+sz+1,M));
+            Range jc(n, min(n+sz+1,N));
+            if (masked)
+                minMaxLoc(src(ic,jc), NULL, &vcmax, NULL, &ijmax, mask(ic,jc));
+            else
+                minMaxLoc(src(ic,jc), NULL, &vcmax, NULL, &ijmax, noArray());
 
-			Point cc = ijmax + Point(jc.start,ic.start);
+            Point cc = ijmax + Point(jc.start,ic.start);
 
-			// search the neighbours centered around the candidate for the true maxima
-			Range in(max(cc.y-sz,0), min((size_t)cc.y+sz+1,M));
-			Range jn(max(cc.x-sz,0), min((size_t)cc.x+sz+1,N));
+            // search the neighbours centered around the candidate for the true maxima
+            Range in(max(cc.y-sz,0), min((size_t)cc.y+sz+1,M));
+            Range jn(max(cc.x-sz,0), min((size_t)cc.x+sz+1,N));
 
-			// mask out the block whose maxima we already know
-			Mat_<uint8_t> blockmask;
-			block(Range(0,in.size()), Range(0,jn.size())).copyTo(blockmask);
-			Range iis(ic.start-in.start, min(ic.start-in.start+sz+1, in.size()));
-			Range jis(jc.start-jn.start, min(jc.start-jn.start+sz+1, jn.size()));
-			blockmask(iis, jis) = Mat_<uint8_t>::zeros(Size(jis.size(),iis.size()));
+            // mask out the block whose maxima we already know
+            Mat_<uint8_t> blockmask;
+            block(Range(0,in.size()), Range(0,jn.size())).copyTo(blockmask);
+            Range iis(ic.start-in.start, min(ic.start-in.start+sz+1, in.size()));
+            Range jis(jc.start-jn.start, min(jc.start-jn.start+sz+1, jn.size()));
+            blockmask(iis, jis) = Mat_<uint8_t>::zeros(Size(jis.size(),iis.size()));
 
-			minMaxLoc(src(in,jn), NULL, &vnmax, NULL, &ijmax, masked ? mask(in,jn).mul(blockmask) : blockmask);
-			//Point cn = ijmax + Point(jn.start, in.start);
+            minMaxLoc(src(in,jn), NULL, &vnmax, NULL, &ijmax, masked ? mask(in,jn).mul(blockmask) : blockmask);
+            //Point cn = ijmax + Point(jn.start, in.start);
 
-			// if the block centre is also the neighbour centre, then it's a local maxima
-			if (vcmax > vnmax) {
-				dst.at<uint8_t>(cc.y, cc.x) = 255;
-			}
-		}
-	}
+            // if the block centre is also the neighbour centre, then it's a local maxima
+            if (vcmax > vnmax) {
+                dst.at<uint8_t>(cc.y, cc.x) = 255;
+            }
+        }
+    }
 }

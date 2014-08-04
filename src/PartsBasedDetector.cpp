@@ -52,7 +52,7 @@ using namespace std;
  */
 template<typename T>
 void PartsBasedDetector<T>::detect(const cv::Mat& im, vectorCandidate& candidates) {
-	detect(im, Mat(), candidates);
+    detect(im, Mat(), candidates);
 }
 
 /*! @brief search an image for potential object candidates
@@ -68,29 +68,29 @@ void PartsBasedDetector<T>::detect(const cv::Mat& im, vectorCandidate& candidate
 template<typename T>
 void PartsBasedDetector<T>::detect(const Mat& im, const Mat& depth, vectorCandidate& candidates) {
 
-	// calculate a feature pyramid for the new image
-	vectorMat pyramid;
-	features_->pyramid(im, pyramid);
+    // calculate a feature pyramid for the new image
+    vectorMat pyramid;
+    features_->pyramid(im, pyramid);
 
-	// convolve the feature pyramid with the Part experts
-	// to get probability density for each Part
-	vector2DMat pdf;
-	convolution_engine_->pdf(pyramid, pdf);
+    // convolve the feature pyramid with the Part experts
+    // to get probability density for each Part
+    vector2DMat pdf;
+    convolution_engine_->pdf(pyramid, pdf);
 
-	// use dynamic programming to predict the best detection candidates from the part responses
-	vector4DMat Ix, Iy, Ik;
-	vector2DMat rootv, rooti;
-	dp_.min(parts_, pdf, Ix, Iy, Ik, rootv, rooti);
+    // use dynamic programming to predict the best detection candidates from the part responses
+    vector4DMat Ix, Iy, Ik;
+    vector2DMat rootv, rooti;
+    dp_.min(parts_, pdf, Ix, Iy, Ik, rootv, rooti);
 
-	// suppress non-maximal candidates
-	//ssp_.nonMaxSuppression(rootv, features_->scales());
+    // suppress non-maximal candidates
+    //ssp_.nonMaxSuppression(rootv, features_->scales());
 
-	// walk back down the tree to find the part locations
-	dp_.argmin(parts_, rootv, rooti, features_->scales(), Ix, Iy, Ik, candidates);
+    // walk back down the tree to find the part locations
+    dp_.argmin(parts_, rootv, rooti, features_->scales(), Ix, Iy, Ik, candidates);
 
-	if (!depth.empty()) {
-		//ssp_.filterCandidatesByDepth(parts_, candidates, depth, 0.03);
-	}
+    if (!depth.empty()) {
+        //ssp_.filterCandidatesByDepth(parts_, candidates, depth, 0.03);
+    }
 
 }
 
@@ -101,28 +101,28 @@ void PartsBasedDetector<T>::detect(const Mat& im, const Mat& depth, vectorCandid
 template<typename T>
 void PartsBasedDetector<T>::distributeModel(Model& model) {
 
-	// the name of the Part detector
-	name_ = model.name();
+    // the name of the Part detector
+    name_ = model.name();
 
-	// initialize the Feature engine
-	features_.reset(new HOGFeatures<T>(model.binsize(), model.nscales(), model.flen(), model.norient()));
+    // initialize the Feature engine
+    features_.reset(new HOGFeatures<T>(model.binsize(), model.nscales(), model.flen(), model.norient()));
 
-	//initialise the convolution engine
-	convolution_engine_.reset(new SpatialConvolutionEngine(DataType<T>::type, model.flen()));
+    //initialise the convolution engine
+    convolution_engine_.reset(new SpatialConvolutionEngine(DataType<T>::type, model.flen()));
 
-	// make sure the filters are of the correct precision for the Feature engine
-	const size_t nfilters = model.filters().size();
-	for (size_t n = 0; n < nfilters; ++n) {
-		model.filters()[n].convertTo(model.filters()[n], DataType<T>::type);
-	}
-	convolution_engine_->setFilters(model.filters());
+    // make sure the filters are of the correct precision for the Feature engine
+    const size_t nfilters = model.filters().size();
+    for (size_t n = 0; n < nfilters; ++n) {
+        model.filters()[n].convertTo(model.filters()[n], DataType<T>::type);
+    }
+    convolution_engine_->setFilters(model.filters());
 
-	// initialize the tree of Parts
-	parts_ = Parts(model.filters(), model.filtersi(), model.def(), model.defi(), model.bias(), model.biasi(),
-			model.anchors(), model.biasid(), model.filterid(), model.defid(), model.parentid());
+    // initialize the tree of Parts
+    parts_ = Parts(model.filters(), model.filtersi(), model.def(), model.defi(), model.bias(), model.biasi(),
+                   model.anchors(), model.biasid(), model.filterid(), model.defid(), model.parentid());
 
-	// initialize the dynamic program
-	dp_ = DynamicProgram<T>(model.thresh());
+    // initialize the dynamic program
+    dp_ = DynamicProgram<T>(model.thresh());
 
 }
 

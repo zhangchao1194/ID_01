@@ -30,10 +30,10 @@
  *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  File:    SpatialConvolutionEngine.hpp
  *  Author:  Hilton Bristow
- *  Created: Oct 9, 2012 
+ *  Created: Oct 9, 2012
  */
 
 #ifdef _OPENMP
@@ -45,10 +45,10 @@ using namespace std;
 using namespace cv;
 
 SpatialConvolutionEngine::SpatialConvolutionEngine(int type, size_t flen) :
-	type_(type), flen_(flen) {}
+    type_(type), flen_(flen) {}
 
 SpatialConvolutionEngine::~SpatialConvolutionEngine() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 /*! @brief Convolve two matrices, with a stride of greater than one
@@ -69,24 +69,24 @@ SpatialConvolutionEngine::~SpatialConvolutionEngine() {
  */
 void SpatialConvolutionEngine::convolve(const Mat& feature, vectorFilterEngine& filter, Mat& pdf, const size_t stride) {
 
-	// error checking
-	assert(feature.depth() == type_);
+    // error checking
+    assert(feature.depth() == type_);
 
-	// split the feature into separate channels
-	vectorMat featurev;
-	split(feature.reshape(stride), featurev);
+    // split the feature into separate channels
+    vectorMat featurev;
+    split(feature.reshape(stride), featurev);
 
-	// calculate the output
-	Rect roi(0,0,-1,-1); // full image
-	Point offset(0,0);
-	Size fsize = featurev[0].size();
-	pdf = Mat::zeros(fsize, type_);
+    // calculate the output
+    Rect roi(0,0,-1,-1); // full image
+    Point offset(0,0);
+    Size fsize = featurev[0].size();
+    pdf = Mat::zeros(fsize, type_);
 
-	for (size_t c = 0; c < stride; ++c) {
-		Mat pdfc(fsize, type_);
-		filter[c]->apply(featurev[c], pdfc, roi, offset, true);
-		pdf += pdfc;
-	}
+    for (size_t c = 0; c < stride; ++c) {
+        Mat pdfc(fsize, type_);
+        filter[c]->apply(featurev[c], pdfc, roi, offset, true);
+        pdf += pdfc;
+    }
 }
 
 
@@ -101,22 +101,22 @@ void SpatialConvolutionEngine::convolve(const Mat& feature, vectorFilterEngine& 
  */
 void SpatialConvolutionEngine::pdf(const vectorMat& features, vector2DMat& responses) {
 
-	// preallocate the output
-	const size_t M = features.size();
-	const size_t N = filters_.size();
-	responses.resize(M, vectorMat(N));
+    // preallocate the output
+    const size_t M = features.size();
+    const size_t N = filters_.size();
+    responses.resize(M, vectorMat(N));
 
-	// iterate
+    // iterate
 #ifdef _OPENMP
-	#pragma omp parallel for
+#pragma omp parallel for
 #endif
-	for (size_t n = 0; n < N; ++n) {
-		for (size_t m = 0; m < M; ++m) {
-			Mat response;
-			convolve(features[m], filters_[n], response, flen_);
-			responses[m][n] = response;
-		}
-	}
+    for (size_t n = 0; n < N; ++n) {
+        for (size_t m = 0; m < M; ++m) {
+            Mat response;
+            convolve(features[m], filters_[n], response, flen_);
+            responses[m][n] = response;
+        }
+    }
 }
 
 /*! @brief set the filters
@@ -128,28 +128,28 @@ void SpatialConvolutionEngine::pdf(const vectorMat& features, vector2DMat& respo
  */
 void SpatialConvolutionEngine::setFilters(const vectorMat& filters) {
 
-	const size_t N = filters.size();
-	filters_.clear();
-	filters_.resize(N);
+    const size_t N = filters.size();
+    filters_.clear();
+    filters_.resize(N);
 
-	// split each filter into separate channels, and create a filter engine
-	const size_t C = flen_;
-	for (size_t n = 0; n < N; ++n) {
-		vectorMat filtervec;
-		std::vector<Ptr<FilterEngine> > filter_engines(C);
-		split(filters[n].reshape(C), filtervec);
+    // split each filter into separate channels, and create a filter engine
+    const size_t C = flen_;
+    for (size_t n = 0; n < N; ++n) {
+        vectorMat filtervec;
+        std::vector<Ptr<FilterEngine> > filter_engines(C);
+        split(filters[n].reshape(C), filtervec);
 
-		// the first N-1 filters have zero-padding
-		for (size_t m = 0; m < C-1; ++m) {
-			Ptr<FilterEngine> fe = createLinearFilter(type_, type_,
-					filtervec[m], Point(-1,-1), 0, BORDER_CONSTANT, -1, Scalar(0,0,0,0));
-			filter_engines[m] = fe;
-		}
+        // the first N-1 filters have zero-padding
+        for (size_t m = 0; m < C-1; ++m) {
+            Ptr<FilterEngine> fe = createLinearFilter(type_, type_,
+                                                      filtervec[m], Point(-1,-1), 0, BORDER_CONSTANT, -1, Scalar(0,0,0,0));
+            filter_engines[m] = fe;
+        }
 
-		// the last filter has one-padding
-		Ptr<FilterEngine> fe = createLinearFilter(type_, type_,
-				filtervec[C-1], Point(-1,-1), 0, BORDER_CONSTANT, -1, Scalar(1,1,1,1));
-		filter_engines[C-1] = fe;
-		filters_[n] = filter_engines;
-	}
+        // the last filter has one-padding
+        Ptr<FilterEngine> fe = createLinearFilter(type_, type_,
+                                                  filtervec[C-1], Point(-1,-1), 0, BORDER_CONSTANT, -1, Scalar(1,1,1,1));
+        filter_engines[C-1] = fe;
+        filters_[n] = filter_engines;
+    }
 }

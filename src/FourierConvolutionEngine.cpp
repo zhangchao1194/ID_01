@@ -30,10 +30,10 @@
  *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
  *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  *  File:    FourierConvolutionEngine.hpp
  *  Author:  Hilton Bristow
- *  Created: July 6, 2013 
+ *  Created: July 6, 2013
  */
 
 #ifdef _OPENMP
@@ -48,35 +48,35 @@ using namespace std;
 using namespace cv;
 
 FourierConvolutionEngine::FourierConvolutionEngine(const Size& size, int type, size_t flen) :
-	size_(Size(getOptimalDFTSize(size.width), getOptimalDFTSize(size.height))), type_(type), flen_(flen) {}
+    size_(Size(getOptimalDFTSize(size.width), getOptimalDFTSize(size.height))), type_(type), flen_(flen) {}
 
 FourierConvolutionEngine::~FourierConvolutionEngine() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 void FourierConvolutionEngine::convolve(const Mat& feature, vectorMat& filter, Mat& pdf, const size_t channels) {
 
-  // error checking
-  assert(feature.depth() == type_);
+    // error checking
+    assert(feature.depth() == type_);
 
-  // split the feature into separate channels
-  vectorMat featurevec;
-  split(feature.reshape(channels), featurevec);
-  Size size = featurevec[0].size();
-  Rect valid(0, 0, size.width, size.height);
+    // split the feature into separate channels
+    vectorMat featurevec;
+    split(feature.reshape(channels), featurevec);
+    Size size = featurevec[0].size();
+    Rect valid(0, 0, size.width, size.height);
 
-  // for each channel, convolve
-  Mat temp = Mat::zeros(size_, type_);
-  for (size_t c = 0; c < channels; ++c) {
-    Mat padded = Mat::zeros(size_, type_);
-    Mat corner(padded, valid);
-    featurevec[c].copyTo(corner);
-    dft(padded, padded, 0, size.height);
-    mulSpectrums(padded, filter[c], padded, 0);
-    temp += padded;
-  }
-  dft(temp, temp, DFT_INVERSE + DFT_SCALE, size.height);
-  temp(valid).copyTo(pdf);
+    // for each channel, convolve
+    Mat temp = Mat::zeros(size_, type_);
+    for (size_t c = 0; c < channels; ++c) {
+        Mat padded = Mat::zeros(size_, type_);
+        Mat corner(padded, valid);
+        featurevec[c].copyTo(corner);
+        dft(padded, padded, 0, size.height);
+        mulSpectrums(padded, filter[c], padded, 0);
+        temp += padded;
+    }
+    dft(temp, temp, DFT_INVERSE + DFT_SCALE, size.height);
+    temp(valid).copyTo(pdf);
 }
 
 /*! @brief Calculate the responses of a set of features to a set of filter experts
@@ -89,23 +89,23 @@ void FourierConvolutionEngine::convolve(const Mat& feature, vectorMat& filter, M
  * @param responses the vector of responses (pdfs) to return
  */
 void FourierConvolutionEngine::pdf(const vectorMat& features, vector2DMat& responses) {
-  
-  // preallocate the output
-  const size_t M = features.size();
-  const size_t N = filters_.size();
-  responses.resize(M, vectorMat(N));
 
-  // iterate
+    // preallocate the output
+    const size_t M = features.size();
+    const size_t N = filters_.size();
+    responses.resize(M, vectorMat(N));
+
+    // iterate
 #ifdef _OPENMP
-  #pragma omp parallel for
+#pragma omp parallel for
 #endif
-  for (size_t n = 0; n < N; ++n) {
-    for (size_t m = 0; m < M; ++m) {
-      Mat response;
-      convolve(features[m], filters_[n], response, flen_);
-      responses[m][n] = response;
+    for (size_t n = 0; n < N; ++n) {
+        for (size_t m = 0; m < M; ++m) {
+            Mat response;
+            convolve(features[m], filters_[n], response, flen_);
+            responses[m][n] = response;
+        }
     }
-  }
 }
 
 /*! @brief set the filters
@@ -117,23 +117,23 @@ void FourierConvolutionEngine::pdf(const vectorMat& features, vector2DMat& respo
  */
 void FourierConvolutionEngine::setFilters(const vectorMat& filters) {
 
-  // allocate space in the vector for the filters
-  const size_t N = filters.size();
-  filters_.clear();
-  filters_.resize(N);
+    // allocate space in the vector for the filters
+    const size_t N = filters.size();
+    filters_.clear();
+    filters_.resize(N);
 
-  // iterate over the filters
-  const size_t C = flen_;
-  for (size_t n = 0; n < N; ++n) {
-    vectorMat filtervec(C);
-    split(filters[n].reshape(C), filtervec);
-   
-    // for each channel, pad the filter to the optimal size and take the fourier transform
-    for (size_t c = 0; c < C; ++c) {
-      Mat padded = Mat::zeros(size_, type_);
-      Mat corner(padded, Rect(0, 0, filtervec[c].cols, filtervec[c].rows));
-      filtervec[c].copyTo(corner);
-      dft(padded, filtervec[c], 0, filtervec[c].rows);
+    // iterate over the filters
+    const size_t C = flen_;
+    for (size_t n = 0; n < N; ++n) {
+        vectorMat filtervec(C);
+        split(filters[n].reshape(C), filtervec);
+
+        // for each channel, pad the filter to the optimal size and take the fourier transform
+        for (size_t c = 0; c < C; ++c) {
+            Mat padded = Mat::zeros(size_, type_);
+            Mat corner(padded, Rect(0, 0, filtervec[c].cols, filtervec[c].rows));
+            filtervec[c].copyTo(corner);
+            dft(padded, filtervec[c], 0, filtervec[c].rows);
+        }
     }
-  }
 }
