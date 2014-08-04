@@ -1,2 +1,0 @@
-/root/git/repos/ID_01/lib/libzhangPoseEstimation.so
-/root/git/repos/ID_01/bin/zhangPoseEstimation
