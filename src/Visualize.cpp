@@ -77,7 +77,8 @@ void Visualize::candidates(const Mat& im, const vectorCandidate& candidates, siz
 	N = (candidates.size() < N) ? candidates.size() : N;
 	for (size_t n = 0; n < N; ++n) {
 		Candidate candidate = candidates[n];
-		for (size_t p = 0; p < candidate.parts().size(); ++p) {
+        //for (size_t p = 0; p < candidate.parts().size(); ++p) {
+        for (size_t p = 0; p < 1; ++p) {
 			Rect box = candidate.parts()[p];
 			string confidence  = boost::lexical_cast<string>(candidate.confidence()[p]);
 			rectangle(canvas, box, colors[p], LINE_THICKNESS);
