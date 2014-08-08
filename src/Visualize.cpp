@@ -73,7 +73,6 @@ void Visualize::candidates(const Mat& im, const vectorCandidate& candidates, siz
         colors.push_back(Scalar(color.at<float>(0), color.at<float>(1), color.at<float>(2)));
     }
 
-<<<<<<< HEAD
     // draw each candidate to the canvas
     const int LINE_THICKNESS = 4;
     Scalar black(0,0,0);
@@ -90,23 +89,6 @@ void Visualize::candidates(const Mat& im, const vectorCandidate& candidates, siz
         }
         //rectangle(canvas, candidate.boundingBox(), Scalar(255, 0, 0), LINE_THICKNESS);
     }
-=======
-	// draw each candidate to the canvas
-	const int LINE_THICKNESS = 4;
-	Scalar black(0,0,0);
-	N = (candidates.size() < N) ? candidates.size() : N;
-	for (size_t n = 0; n < N; ++n) {
-		Candidate candidate = candidates[n];
-        //for (size_t p = 0; p < candidate.parts().size(); ++p) {
-        for (size_t p = 0; p < 1; ++p) {
-			Rect box = candidate.parts()[p];
-			string confidence  = boost::lexical_cast<string>(candidate.confidence()[p]);
-			rectangle(canvas, box, colors[p], LINE_THICKNESS);
-			if (display_confidence && p == 0) putText(canvas, confidence, Point(box.x, box.y-5), FONT_HERSHEY_SIMPLEX, 0.5f, black, 2);
-		}
-		//rectangle(canvas, candidate.boundingBox(), Scalar(255, 0, 0), LINE_THICKNESS);
-	}
->>>>>>> 66f43d948b36acd21c4cd889d92fc734856ccc8a
 }
 
 /*! @brief visualize all of the candidate part locations overlaid on an image

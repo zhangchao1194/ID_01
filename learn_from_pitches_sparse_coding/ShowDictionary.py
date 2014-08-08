@@ -3,7 +3,8 @@ import numpy as np
 
 patch_size = (8,8)
 V = np.load('Dictionaries.npy')
-plt.figure(figsize=(4.2, 4))
+plt.figure(figsize=(10, 10))
+#plt.figure(figsize=(4.2, 4))
 for i, patch in enumerate(V):
     plt.subplot(18, 18, i + 1)
     plt.imshow(patch.reshape(patch_size), cmap=plt.cm.gray, interpolation='nearest')

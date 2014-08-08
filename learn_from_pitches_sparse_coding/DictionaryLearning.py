@@ -7,21 +7,21 @@ from sklearn.decomposition import DictionaryLearning
 #read the image list
 def ImageListFile2Array(filename):
     patch_size = (8,8)
-    stride_size = (8,8)
+    stride_size = (6,6)
     imgArray = None
     image_list = open(filename)
     for image_file in image_list:
         #delete the enter space
         image_file =  image_file.rstrip()
         print image_file
-        
-        #read images   
+
+        #read images
         im = Image.open(image_file)
-        
+
         #convert to grayscal
         gray_im = ImageOps.grayscale(im)
-	
-	w = gray_im.size[0] - patch_size[0]
+
+        w = gray_im.size[0] - patch_size[0]
         h = gray_im.size[1] - patch_size[1]
         y = 0
         while y <= h:
@@ -29,7 +29,7 @@ def ImageListFile2Array(filename):
             while x <= w:
                 box = (x,y,x+patch_size[0],y+patch_size[1])
                 crop_im = gray_im.crop(box)
-                
+
                 data = np.asarray(crop_im)
                 data = data.reshape(1,data.size)
                 if imgArray is None:
@@ -41,7 +41,7 @@ def ImageListFile2Array(filename):
     return imgArray
 
 #
-num_basis = 324
+num_basis = 100
 
 #read the image list
 imgArray = ImageListFile2Array('patchlist.txt')
