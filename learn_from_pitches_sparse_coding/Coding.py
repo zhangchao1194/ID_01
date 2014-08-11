@@ -16,6 +16,7 @@ def GrayArray2RGB(gray_array):
 
 def CodeCroppedImage(coder, data):
     u = coder.transform(data)
+    #print u
     return u
 
 def argwrapper(args):
@@ -37,7 +38,7 @@ if __name__ == '__main__':
     src_file = './imgs/im0001.jpg'
     cell_size = (8,8)
     pool_size = (2,2)
-    detect_window_size = (4,4)
+    detect_window_size = (2,2)
     stride_size = (2,2)
     
     V = np.load('./324 filters/Dictionaries(mini_8_8_6x6_100000).npy')
@@ -45,19 +46,19 @@ if __name__ == '__main__':
     gray_im = ImageOps.grayscale(im)
     w = gray_im.size[0] - cell_size[0]
     h = gray_im.size[1] - cell_size[1]
-    print "image size: ", w, h
+    print "image size(pixel): ", w, h
     cell_w = (int)(gray_im.size[0]/cell_size[0])
     cell_h = (int)(gray_im.size[1]/cell_size[1])
-    print "cell size: ", cell_size[0], cell_size[1]
-    print "cell image size:", cell_w, cell_h
-    print "pool size:", pool_size[0], pool_size[1]
-    print "stride size:", stride_size[0], stride_size[1]
-    print "detect_window_size:", detect_window_size[0], detect_window_size[1]
-    print "pooled image size:", int(cell_w/pool_size[0]), int(cell_h/pool_size[1])
+    print "cell size(pixel): ", cell_size[0], cell_size[1]
+    print "cell image size:(cell)", cell_w, cell_h
+    print "pool size:(cell)", pool_size[0], pool_size[1]
+    print "stride size(pool):", stride_size[0], stride_size[1]
+    print "detect_window_size(pool):", detect_window_size[0], detect_window_size[1]
+    print "pooled image size:(pool)", int(cell_w/pool_size[0]), int(cell_h/pool_size[1])
     img_width = gray_im.size[0]
     img_height = gray_im.size[1]
     y = 0
-    coder = SparseCoder(dictionary=V, transform_algorithm='omp', transform_n_nonzero_coefs=10)
+    coder = SparseCoder(dictionary=V, transform_algorithm='lasso_lars', transform_n_nonzero_coefs=50)
 #    dst_coded_array = np.zeros( (h_num_cell, w_num_cell*V.shape[0]) )
     
     #store all the cells
@@ -84,7 +85,6 @@ if __name__ == '__main__':
     #print np.array_equal(temp1, temp)
      
 #on cell image   
-    p1 = Pool()
     y = 0
     w = cell_w - pool_size[0]
     h = cell_h - pool_size[1]
@@ -96,8 +96,11 @@ if __name__ == '__main__':
             func_args.append( (maxpooling,array_for_pooling) )
             x+=pool_size[0]
         y+=pool_size[1]
-    pooled_list_results = p1.map(argwrapper, func_args)
-    print len(pooled_list_results)
+    pooled_list_results = p.map(argwrapper, func_args)
+    pooled_array_results = np.asarray(pooled_list_results)
+    pooled_array_results = pooled_array_results.reshape( (13,8,324) )
+    
+    #print pooled_array_results
     #compute the sparse coded vectors parallel
     dt = time() - t0
     print 'done in %.2fs.' % dt
