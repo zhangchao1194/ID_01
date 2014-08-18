@@ -1,0 +1,30 @@
+import Image
+import ImageOps
+import numpy as np
+from time import time
+from sklearn.decomposition import SparseCoder
+from time import time
+from multiprocessing import Pool
+import os
+
+def count_file_num(path):
+    count = 0
+path = r'C:\Users\xxxx\Desktop\top'
+ 
+for root, dirs, files in os.walk(path):
+    #print files
+    fileLength = len(files)
+    if fileLength != 0:
+        count = count + fileLength
+if __name__ == '__main__':
+    t0 = time()
+    f = open("feature.txt","wr")
+    str_class = ("lank","lkne","lhip","rhip","rkne","rank","lwr","lelb","lsho","rsho","relb","rwr","hbot","htop","neg")
+    for temp in str_class:
+        filepath = "./imgs/articulations/" + temp + "/"
+        for i in xrange(305):
+            print str_class.index(temp)
+
+
+    dt = time() - t0
+    print 'done in %.2fs.' % dt

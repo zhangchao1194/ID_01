@@ -35,7 +35,7 @@ if __name__ == '__main__':
     t0 = time()
     func_args = []
     #input image
-    src_file = '/root/git/repos/ID_01/learn_from_pitches_sparse_coding/imgs/articulations/hbot/1.jpg'
+    src_file = './imgs/im0108.jpg'
     cell_size = (8,8)
     pool_size = (2,2)
     stride_size = (2,2)

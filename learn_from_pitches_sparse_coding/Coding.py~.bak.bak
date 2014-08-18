@@ -29,17 +29,17 @@ def maxpooling(array_for_pooling):
             maxarray = np.maximum(maxarray, array_for_pooling[:,0,0])
             #print maxarray
     return maxarray
-
-
+        
+      
 if __name__ == '__main__':
     t0 = time()
     func_args = []
     #input image
-    src_file = '/root/git/repos/ID_01/learn_from_pitches_sparse_coding/imgs/articulations/hbot/1.jpg'
+    src_file = './imgs/im0108.jpg'
     cell_size = (8,8)
     pool_size = (2,2)
     stride_size = (2,2)
-
+    
     V = np.load('./324 filters/Dictionaries(mini_8_8_6x6_100000).npy')
     im = Image.open(src_file)
     gray_im = ImageOps.grayscale(im)
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     y = 0
     coder = SparseCoder(dictionary=V, transform_algorithm='omp', transform_n_nonzero_coefs=50)
 #    dst_coded_array = np.zeros( (h_num_cell, w_num_cell*V.shape[0]) )
-
+    
     #store all the cells
     while y <= h:
         x = 0
@@ -70,7 +70,7 @@ if __name__ == '__main__':
             func_args.append( (CodeCroppedImage,coder,data) )
             x+=cell_size[0]
         y+=cell_size[1]
-    #print len(func_args)
+    #print len(func_args) 
     p = Pool()
     list_results = p.map(argwrapper, func_args)
     array_reslts = np.asarray(list_results)
@@ -81,8 +81,8 @@ if __name__ == '__main__':
     #print array_reslts.shape
     #temp1 = array_reslts[:,0,1]
     #print np.array_equal(temp1, temp)
-
-#on cell image
+     
+#on cell image   
     y = 0
     w = cell_w - pool_size[0]
     h = cell_h - pool_size[1]
