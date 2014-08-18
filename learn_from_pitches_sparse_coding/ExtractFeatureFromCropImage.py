@@ -22,12 +22,12 @@ def maxpooling(array_for_pooling):
     for y in xrange(array_for_pooling.shape[1]):
         for x in xrange(array_for_pooling.shape[2]):
 #            maxarray_absolute = np.maximum(maxarray_absolute, np.absolute(array_for_pooling[:,0,0]))
-            maxarray = np.maximum(maxarray, array_for_pooling[:,0,0])  
-#    for temp in xrange(maxarray.size):     
+            maxarray = np.maximum(maxarray, array_for_pooling[:,0,0])
+#    for temp in xrange(maxarray.size):
 #        if maxarray_absolute[temp]!=maxarray[temp]:
-#            maxarray[temp] = 0-maxarray_absolute[temp]          
+#            maxarray[temp] = 0-maxarray_absolute[temp]
     return maxarray
-    
+
 def count_file_num(path):
     count = 0
     for root, dirs, files in os.walk(path):
@@ -35,7 +35,7 @@ def count_file_num(path):
         if fileLength != 0:
             count = count + fileLength
     return count
-    
+
 def crop_img_to_feature(color_img, p):
     V = np.load('./100 filters/Dictionaries(mini_8_8_6_6_100000).npy')
     func_args = []
@@ -50,7 +50,7 @@ def crop_img_to_feature(color_img, p):
     img_width = gray_im.size[0]
     img_height = gray_im.size[1]
     y = 0
-    coder = SparseCoder(dictionary=V, transform_algorithm='lasso_lars', transform_n_nonzero_coefs=50)
+    coder = SparseCoder(dictionary=V, transform_algorithm='lasso_lars', transform_n_nonzero_coefs=10)
     while y <= h:
         x = 0
         while x <= w:
@@ -80,16 +80,16 @@ def crop_img_to_feature(color_img, p):
     pooled_list_results = p.map(argwrapper, func_args)
     pooled_array_results = np.asarray(pooled_list_results)
     pooled_array_results = pooled_array_results.reshape( (1,1,V.shape[0]*pool_size[0]*pool_size[1]) )
-    
-    
+
+
     #print pooled_array_results.shape
-    return pooled_array_results  
-    
+    return pooled_array_results
+
 def l2_normalize(feature):
     feature_2d = feature.reshape( (1,feature.shape[2]) )
-    feature_2d = normalize(feature_2d, norm='l2', axis=1, copy=True) 
+    feature_2d = normalize(feature_2d, norm='l2', axis=1, copy=True)
     return feature_2d
-    
+
 if __name__ == '__main__':
     t0 = time()
     p = Pool()
@@ -108,7 +108,7 @@ if __name__ == '__main__':
             imgpath = filepath + str(j) + ".jpg"
             img = Image.open(imgpath)
             #extract feature
-            feature = crop_img_to_feature(img,p)   
+            feature = crop_img_to_feature(img,p)
             feature = l2_normalize(feature)
             for axis in xrange(feature.shape[1]):
                 if feature[0,axis]!=0:
@@ -117,6 +117,6 @@ if __name__ == '__main__':
             f.write(str_feature)
             #raw_input()
             #write into file f
-            
+
     dt = time() - t0
     print 'done in %.2fs.' % dt
