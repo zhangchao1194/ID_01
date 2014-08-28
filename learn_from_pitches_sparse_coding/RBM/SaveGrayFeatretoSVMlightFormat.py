@@ -13,7 +13,7 @@ def count_file_num(path):
     
 if __name__ == '__main__':
     f = open("feature.txt","wr")
-    str_class = ("lank","lkne","lhip","rhip","rkne","rank","lwr","lelb","lsho","rsho","relb","rwr","hbot","htop")
+    str_class = ("lank","lkne","lhip","rhip","rkne","rank","lwr","lelb","lsho","rsho","relb","rwr","hbot","htop","neg")
     for temp in str_class:
         filepath = "../imgs/articulations/" + temp + "/"
         count = count_file_num(filepath)
